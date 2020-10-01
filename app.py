@@ -18,19 +18,19 @@ app = Flask(__name__)
 # pull the URI and other configurations from the config file in the app
 app.config.from_pyfile('config.py')
 # Creating the database by using this function
-db = SQLAlchemy()
+db = SQLachemy()
 db.init_app(app)
 db.Model = automap_base(db.Model)
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+# @app.route('/')
+# def home():
+#     return render_template('index.html')
 
-@app.route('')
+@app.route('/myteamdata')
 def viz(data):
     db.Model.prepare(db.engine, reflect=True)
     print(db.Model.classes.keys())
-    #tables "customer_name" columns: id, county_name, license_count, county_id
+    # table "customer_name" columns: id, county_name, license_count, county_id
     data = db.Model.classes['customer_name']
     return jsonify(data)
 
