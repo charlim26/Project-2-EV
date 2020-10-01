@@ -13,23 +13,22 @@ import numpy as np
 # 2. Create an app and pass parameter "__name__"
 app = Flask(__name__)
 
+# Using the "customer_db" database from our previous assignment
+# SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@localhost:5432/customer_db'
 engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
 Base = automap_base()
 Base.prepare(engine, reflect=True)
 db = Base.classes.county
 print(db)
-# pull the URI and other configurations from the config file in the app
-# app.config.from_pyfile('config.py')
-# Creating the database by using this function
-# db = sqlachemy()
-# db.init_app(app)
-# db.Model = automap_base(db.Model)
 
 @app.route('/electric')
 def viz():
     session = Session(engine)
-    results = session.query(db).all()
-    return jsonify(results)
+    result = session.query(db.county_name).all()
+    data = [{"county_name" : c.county_name} for c in result]
+    print(data[0:5])
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
