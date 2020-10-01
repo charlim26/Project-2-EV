@@ -2,7 +2,8 @@
 # to run the app use command python app.py or py app.py (you can paramter port=0000 to change the prt)
 ### 1. Import libraries and dependencies
 from flask import Flask, jsonify, render_template
-from flask_sqlalchemy import sqlalchemy
+# from flask_sqlalchemy import sqlalchemy
+import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
@@ -15,8 +16,8 @@ app = Flask(__name__)
 engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
 Base = automap_base()
 Base.prepare(engine, reflect=True)
-db = Base.classes.customer_name
-print(Base.classes.keys())
+db = Base.classes.county
+print(db)
 # pull the URI and other configurations from the config file in the app
 # app.config.from_pyfile('config.py')
 # Creating the database by using this function
@@ -27,7 +28,7 @@ print(Base.classes.keys())
 @app.route('/electric')
 def viz():
     session = Session(engine)
-    results = session.query(db.county_name)
+    results = session.query(db).all()
     return jsonify(results)
 
 if __name__ == '__main__':
