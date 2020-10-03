@@ -21,6 +21,10 @@ Base.prepare(engine, reflect=True)
 db = Base.classes.county
 print(db)
 
+@app.route('/')
+def home():
+    return render_template(index.html)
+
 @app.route('/electric')
 def viz():
     session = Session(engine)
