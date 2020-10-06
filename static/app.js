@@ -14,25 +14,20 @@ var test = [1,2,3]
 console.log("start");
 fetch(`http://127.0.0.1:5000/electric`, {mode: "no-cors"})
     .then(function(response) {
-        console.log(response);
+        // console.log(response);
         var r = response.json();
-        console.log("response:");
-        console.log(r);
+        // console.log("response:");
+        // console.log(r);
         return r;
     }).then(function(data){
-        console.log("data:");
-        console.log(data);
+        // console.log("data:");
+        // console.log(data);
 });
 console.log("middle");
-fetch(`http://127.0.0.1:5000/stations`, {mode: "no-cors"})
+fetch(`/stations`, {mode: "no-cors"})
     .then(function(response) {
         return response.json();
     }).then(function(data){
         console.log(data);
 });
 console.log("end");
-// fetch(`http://127.0.0.1:5000/stations`, {mode: "no-cors"}).then(function(data) {
-//     data.json().then(function(data){
-//         console.log(data);
-//     })
-// })
