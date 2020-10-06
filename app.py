@@ -9,16 +9,14 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 import config
 import numpy as np
-
 # 2. Create an app and pass parameter "__name__"
 app = Flask(__name__)
-
 # Using the "customer_db" database from our previous assignment
 # SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@localhost:5432/customer_db'
 engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
 Base = automap_base()
 Base.prepare(engine, reflect=True)
-db = Base.classes.county
+db = Base.classes.ev_data
 print(db)
 
 @app.route('/')
@@ -28,11 +26,10 @@ def home():
 @app.route('/electric')
 def viz():
     session = Session(engine)
-    result = session.query(db.county_name).all()
-    data = [{"county_name" : c.county_name} for c in result]
+    result = session.query(db.make).all()
+    data = [{"car_make:" : c.make} for c in result]
     print(data[0:5])
     return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=True)
-
