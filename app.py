@@ -19,7 +19,9 @@ app = Flask(__name__)
 engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
 Base = automap_base()
 Base.prepare(engine, reflect=True)
-db = Base.classes.ev_data
+db_ev = Base.classes.ev_data
+db_stations = Base.classes.ev_data
+
 #print(db)
 
 @app.route('/')
@@ -29,10 +31,22 @@ def home():
 @app.route('/electric', methods=['GET'])
 def viz():
     session = Session(engine)
-    result = session.query(db.make).all()
-    data = [{"car_make:" : c.make} for c in result]
-    print(data[0:5])
-    return jsonify(result)
+    result = session.query(db_ev).all()
+    data = [{
+        "make" : c.make,
+        "model" : c.model,
+        "model_year" : c.model_year,
+        "city" : c.city,
+        "states" : c.states,
+        "zip" : c.zip,
+        "id" : c.dol_vechile_id,
+        "range" : c.electric_range,
+        "vehicle_type" : c.electric_vehicle_type,
+        "vehicle_location" : c.vehicle_location,
+        "base_msrp" : c.base_msrp
+        } for c in result]
+    # print(data[0:5])
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True)
