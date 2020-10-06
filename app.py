@@ -25,7 +25,7 @@ print(db)
 def home():
     return render_template("index.html")
 
-@app.route('/electric')
+@app.route('/electric', methods = ['GET'])
 def viz():
     session = Session(engine)
     result = session.query(db.county_name).all()
