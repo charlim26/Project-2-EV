@@ -9,21 +9,24 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 import config
 import numpy as np
+
+
 # 2. Create an app and pass parameter "__name__"
 app = Flask(__name__)
+
 # Using the "customer_db" database from our previous assignment
-# SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@localhost:5432/customer_db'
+# SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:PASSWORD@localhost:5432/customer_db'
 engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
 Base = automap_base()
 Base.prepare(engine, reflect=True)
 db = Base.classes.ev_data
-print(db)
+#print(db)
 
 @app.route('/')
 def home():
     return render_template("index.html")
 
-@app.route('/electric')
+@app.route('/electric', methods=['GET'])
 def viz():
     session = Session(engine)
     result = session.query(db.make).all()
@@ -33,3 +36,4 @@ def viz():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
