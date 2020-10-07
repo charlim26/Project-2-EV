@@ -48,6 +48,23 @@ def viz():
     # print(data[0:5])
     return jsonify(data)
 
+#returns charging station data
+@app.route('/stations', methods=['GET'])
+def viz2():
+    session = Session(engine)
+    result = session.query(db_stations).all()
+    data = [{
+        "id" : c.station_id,
+        "status" : c.charging_status,
+        "lat" : c.lat,
+        "long" : c.long,
+        "address" : c.address,
+        "zip" : c.zip_code,
+        "outlets" : c.outlet_counts
+        } for c in result]
+    # print(data[0:5])
+    return jsonify(data)
+
 if __name__ == '__main__':
     app.run(debug=True)
 
