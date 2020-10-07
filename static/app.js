@@ -63,6 +63,6 @@ var myMap = L.map("map", {
     zoom: 10,
     layers: [streetmap]
 });
-
+L.control.layers(baseMaps).addTo(myMap);
 
 
