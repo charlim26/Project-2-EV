@@ -20,7 +20,7 @@ engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
 Base = automap_base()
 Base.prepare(engine, reflect=True)
 db_ev = Base.classes.ev_data
-db_stations = Base.classes.ev_data
+db_stations = Base.classes.ev_stations
 
 #print(db)
 

@@ -31,5 +31,5 @@ fetch(`/stations`, {mode: "no-cors"})
         createMap(data);
 });
 console.log("end");
-function createMap (data) {
+function createMap(data) {
 }
