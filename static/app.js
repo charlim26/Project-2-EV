@@ -12,7 +12,7 @@ fetch(`/electric`, {mode: "no-cors"})
         return r;
     }).then(function(data){
         // console.log("data:");
-        console.log(data);
+        console.log(data[0]);
         createMap(data);
 });
 
@@ -22,7 +22,7 @@ fetch(`/stations`, {mode: "no-cors"})
     .then(function(response) {
         return response.json();
     }).then(function(data){
-        console.log(data);
+        console.log(data[0]);
         
         createMap(data);
 });
