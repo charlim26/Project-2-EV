@@ -4,6 +4,8 @@
 var test = [1,2,3]
 console.log("start");
 
+var map = createMap();
+
 fetch(`/electric`, {mode: "no-cors"})
     .then(function(response) {
         // console.log(response);
@@ -14,7 +16,7 @@ fetch(`/electric`, {mode: "no-cors"})
     }).then(function(data){
         // console.log("data:");
         console.log(data[0]);
-        addStations(data);
+        addStations(map, data);
 });
 
 console.log("middle");
@@ -25,12 +27,11 @@ fetch(`/stations`, {mode: "no-cors"})
     }).then(function(data){
         console.log(data[0]);
         
-        addCars(data);
+        addCars(map, data);
 });
 
 console.log("end");
 
-createMap();
 
 
 
