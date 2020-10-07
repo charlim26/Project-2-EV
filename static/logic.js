@@ -26,7 +26,7 @@ function createMap() {
         center: [
             37.09, -95.71
         ],
-        zoom: 5,
+        zoom: 10,
         layers: [streetmap]
         });
 
@@ -36,8 +36,10 @@ function createMap() {
         collapsed: false
         }).addTo(myMap);
 
+    return myMap;
+
 };
-function addStations (station_data) {
+function addStations (map, station_data) {
     // address: "676 Woodland Square Loop SE"
     // id: 167633
     // lat: 47.04178372
@@ -46,7 +48,7 @@ function addStations (station_data) {
     // status: "TRUE"
     // zip: 98503
 }
-function addCars (cars_data) {
+function addCars (map, cars_data) {
     // base_msrp: 27300
     // city: "OLYMPIA"
     // id: 168473210
