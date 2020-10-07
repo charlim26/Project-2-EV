@@ -1,4 +1,5 @@
-d3.select("#bar-plot").text("hello world")
+//include logic.js
+//d3.select("#bar-plot").text("hello world")
 
 var test = [1,2,3]
 console.log("start");
@@ -13,7 +14,7 @@ fetch(`/electric`, {mode: "no-cors"})
     }).then(function(data){
         // console.log("data:");
         console.log(data[0]);
-        createMap(data);
+        addStations(data);
 });
 
 console.log("middle");
@@ -24,11 +25,12 @@ fetch(`/stations`, {mode: "no-cors"})
     }).then(function(data){
         console.log(data[0]);
         
-        createMap(data);
+        addCars(data);
 });
 
 console.log("end");
 
-function createMap (data) {
+createMap();
 
-}
+
+
