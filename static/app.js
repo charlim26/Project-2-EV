@@ -1,14 +1,14 @@
 // need to create a simple viz using d3.json(`/whatever_route`).then(function(something) {})
-let allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', "*");
-    res.header('Access-Control-Allow-Headers', "*");
-    next();
-  }
-//app.use(allowCrossDomain);
+// let allowCrossDomain = function(req, res, next) {
+//     res.header('Access-Control-Allow-Origin', "*");
+//     res.header('Access-Control-Allow-Headers', "*");
+//     next();
+//   }
+// //app.use(allowCrossDomain);
 
-d3.select("#bar-plot").text("hello world");
+// d3.select("#bar-plot").text("hello world");
 
-var test = [1,2,3]
+// var test = [1,2,3]
 
 fetch(`/electric`, {mode: "no-cors"})
     .then(function(response) {
@@ -19,19 +19,36 @@ fetch(`/electric`, {mode: "no-cors"})
         return r;
     }).then(function(data){
         // console.log("data:");
-        console.log(data);
-        createMap(data);
+        console.log(data[0]);
+        passCarData(data);
 });
 console.log("middle");
-fetch(`/stations`, {mode: "no-cors"})
-    .then(function(response) {
-        return response.json();
-    }).then(function(data){
-        console.log(data);
-        // createMap(data);
-});
+function passCarData(car_data) {
+    fetch(`/stations`, {mode: "no-cors"})
+        .then(function(response) {
+            return response.json();
+        }).then(function(data){
+            console.log(data[0]);
+            passStationData(car_data, data);
+    })
+};
+function passStationData(car_data, station_data) {
+
+    d3.json(`static/WA_counties_geo.json`, function(geo) {
+        function onEachFeature(feature, layer) {
+            layer.bindPopup("<h3>" + "feature.properties.place" +
+            "</h3><hr><p>" + "new Date(feature.properties.time)" + "</p>");
+        }
+        console.log(geo.features[0]);
+        var geolayer = L.geoJSON(geo.features, {
+            onEachFeature: onEachFeature
+        });
+        createMap(car_data, station_data, geolayer);
+    })
+}
+
 console.log("end");
-function createMap(data) {
+function createMap(car_data, station_data, geo) {
     // Define streetmap and darkmap layers
     var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
         attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
@@ -57,16 +74,16 @@ function createMap(data) {
     
     // Create overlay object to hold our overlay layer
     var overlayMaps = {
-        data: data
+        data: geo
     };
     
     // Create our map, giving it the streetmap and earthquakes layers to display on load
     var myMap = L.map("map", {
         center: [
-        47.61, -122.33
+        47.88, -120.64
         ],
-        zoom: 5,
-        layers: [streetmap, data]
+        zoom: 7,
+        layers: [streetmap, geo]
     });
     
     L.control.layers(baseMaps, overlayMaps, {
