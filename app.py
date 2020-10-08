@@ -21,13 +21,13 @@ Base = automap_base()
 Base.prepare(engine, reflect=True)
 db_ev = Base.classes.ev_data
 db_stations = Base.classes.ev_stations
+
 #print(db)
 
 @app.route('/')
 def home():
     return render_template("index.html")
 
-#returns electric vehicle data
 @app.route('/electric', methods=['GET'])
 def viz():
     session = Session(engine)
