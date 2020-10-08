@@ -17,19 +17,19 @@ fetch(`/electric`, {mode: "no-cors"})
         // console.log("response:");
         // console.log(r);
         return r;
-    }).then(function(data){
+    }).then(function(car_data){
         // console.log("data:");
-        console.log(data[0]);
-        passCarData(data);
+        console.log(car_data[0]);
+        passCarData(car_data);
 });
 console.log("middle");
 function passCarData(car_data) {
     fetch(`/stations`, {mode: "no-cors"})
         .then(function(response) {
             return response.json();
-        }).then(function(data){
-            console.log(data[0]);
-            passStationData(car_data, data);
+        }).then(function(station_data){
+            console.log(station_data[0]);
+            passStationData(car_data, station_data);
     })
 };
 function passStationData(car_data, station_data) {
