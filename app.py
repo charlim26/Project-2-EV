@@ -20,7 +20,7 @@ engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
 Base = automap_base()
 Base.prepare(engine, reflect=True)
 db_ev = Base.classes.ev_data
-db_stations = Base.classes.ev_data
+db_stations = Base.classes.ev_stations
 
 #print(db)
 
@@ -44,6 +44,23 @@ def viz():
         "vehicle_type" : c.electric_vehicle_type,
         "vehicle_location" : c.vehicle_location,
         "base_msrp" : c.base_msrp
+        } for c in result]
+    # print(data[0:5])
+    return jsonify(data)
+
+#returns charging station data
+@app.route('/stations', methods=['GET'])
+def viz2():
+    session = Session(engine)
+    result = session.query(db_stations).all()
+    data = [{
+        "id" : c.station_id,
+        "status" : c.charging_status,
+        "lat" : c.lat,
+        "long" : c.long,
+        "address" : c.address,
+        "zip" : c.zip_code,
+        "outlets" : c.outlet_counts
         } for c in result]
     # print(data[0:5])
     return jsonify(data)
