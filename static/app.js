@@ -1,10 +1,4 @@
-// need to create a simple viz using d3.json(`/whatever_route`).then(function(something) {})
-// let allowCrossDomain = function(req, res, next) {
-//     res.header('Access-Control-Allow-Origin', "*");
-//     res.header('Access-Control-Allow-Headers', "*");
-//     next();
-//   }
-// //app.use(allowCrossDomain);
+
 
 fetch(`/electric`, {mode: "no-cors"})
     .then(function(response) {
@@ -17,29 +11,8 @@ fetch(`/electric`, {mode: "no-cors"})
         // console.log("data:");
         console.log(data[0]);
         passCarData(data);
-        // heatMap(data);
-        // var heatArray = [];
-
-        // for (var i = 0; i < data.length; i++) {
-        //   var str = data[i].vehicle_location;
-        //   if (str) {
-        //     var arr = str.split(" ");
-        //     var long = arr[1].substring(1);
-        //     var lat = arr[2].substring(0, arr[2].length - 1);
-        //     // "+" to make sure a string becomes a numeric value
-        //     heatArray.push([+lat, +long]);
-        //   }
-        // }
-        // console.log(heatArray)
-
-        // var str = data[0].vehicle_location;
-        // var arr = str.split(" ");
-        // console.log(arr)
-        // var long = arr[1].substring(1)
-        // var lat = arr[2].substring(0, arr[2].length - 1)
-        // console.log(lat)
 });
-console.log("middle");
+// console.log("middle");
 function passCarData(car_data) {
     fetch(`/stations`, {mode: "no-cors"})
         .then(function(response) {
@@ -64,7 +37,7 @@ function passStationData(car_data, station_data) {
     })
 }
 
-console.log("end");
+// console.log("end");
 function createMap(car_data, station_data, geo) {
     // Define streetmap and darkmap layers
     var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -107,14 +80,8 @@ function createMap(car_data, station_data, geo) {
         collapsed: false
       }).addTo(myMap);
     
-    heatMap(car_data).addTo(myMap)
+    heatMap(car_data).addTo(myMap);
 }
-
-console.log("test");
-// create a heatmap
-// d3.json(`/electric`).then(function(data) {
-//   console.log(data[0]);
-// })
 
 function heatMap(data) {
   var heatArray = [];
