@@ -1,15 +1,3 @@
-// need to create a simple viz using d3.json(`/whatever_route`).then(function(something) {})
-// let allowCrossDomain = function(req, res, next) {
-//     res.header('Access-Control-Allow-Origin', "*");
-//     res.header('Access-Control-Allow-Headers', "*");
-//     next();
-//   }
-// //app.use(allowCrossDomain);
-
-// d3.select("#bar-plot").text("hello world");
-
-// var test = [1,2,3]
-
 fetch(`/electric`, {mode: "no-cors"})
     .then(function(response) {
         // console.log(response);
@@ -22,7 +10,7 @@ fetch(`/electric`, {mode: "no-cors"})
         console.log(car_data[0]);
         passCarData(car_data);
 });
-console.log("middle");
+
 function passCarData(car_data) {
     fetch(`/stations`, {mode: "no-cors"})
         .then(function(response) {
@@ -32,12 +20,13 @@ function passCarData(car_data) {
             passStationData(car_data, station_data);
     })
 };
+
 function passStationData(car_data, station_data) {
 
     d3.json(`static/WA_counties_geo.json`, function(geo) {
         function onEachFeature(feature, layer) {
-            layer.bindPopup("<h3>" + "feature.properties.place" +
-            "</h3><hr><p>" + "new Date(feature.properties.time)" + "</p>");
+            layer.bindPopup("<h3>" + feature.properties.LSAD + " " + feature.properties.NAME
+            + "</h3>");
         }
         console.log(geo.features[0]);
         var geolayer = L.geoJSON(geo.features, {
@@ -47,7 +36,6 @@ function passStationData(car_data, station_data) {
     })
 }
 
-console.log("end");
 function createMap(car_data, station_data, geo) {
     // Define streetmap and darkmap layers
     var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -74,7 +62,7 @@ function createMap(car_data, station_data, geo) {
     
     // Create overlay object to hold our overlay layer
     var overlayMaps = {
-        data: geo
+        Counties: geo
     };
     
     // Create our map, giving it the streetmap and earthquakes layers to display on load
