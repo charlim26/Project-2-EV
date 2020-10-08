@@ -88,11 +88,13 @@ function createMap(car_data, station_data, geo) {
     // Add all the stationMarkers to a new layer group.
     // Now we can handle them as one group instead of referencing each individually
     var stationLayer = L.layerGroup(stationMarkers);
+    var heat = heatMap(car_data);
 
     // Create overlay object to hold our overlay layer
     var overlayMaps = {
         counties: geo,
-        stations: stationLayer
+        stations: stationLayer,
+        cars: heat
     };
     
     // Create our map, giving it the streetmap and earthquakes layers to display on load
@@ -101,10 +103,29 @@ function createMap(car_data, station_data, geo) {
         47.88, -120.64
         ],
         zoom: 7,
-        layers: [streetmap, geo, stationLayer]
+        layers: [streetmap, geo]
     });
 
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
       }).addTo(myMap);
 }
+
+function heatMap(data) {
+    var heatArray = [];
+    for (var i = 0; i < data.length; i++) {
+      var str = data[i].vehicle_location;
+      if (str) {
+        var arr = str.split(" ");
+        var long = arr[1].substring(1);
+        var lat = arr[2].substring(0, arr[2].length - 1);
+        // "+" to make sure a string becomes a numeric value
+        heatArray.push([+lat, +long]);
+      }
+    }
+    var heat = L.heatLayer(heatArray, {
+      radius: 20,
+      blur: 35
+    });
+    return heat;
+  }
