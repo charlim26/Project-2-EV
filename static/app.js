@@ -1,3 +1,15 @@
+// need to create a simple viz using d3.json(`/whatever_route`).then(function(something) {})
+// let allowCrossDomain = function(req, res, next) {
+//     res.header('Access-Control-Allow-Origin', "*");
+//     res.header('Access-Control-Allow-Headers', "*");
+//     next();
+//   }
+// //app.use(allowCrossDomain);
+
+// d3.select("#bar-plot").text("hello world");
+
+// var test = [1,2,3]
+
 fetch(`/electric`, {mode: "no-cors"})
     .then(function(response) {
         // console.log(response);
@@ -10,7 +22,7 @@ fetch(`/electric`, {mode: "no-cors"})
         console.log(car_data[0]);
         passCarData(car_data);
 });
-
+console.log("middle");
 function passCarData(car_data) {
     fetch(`/stations`, {mode: "no-cors"})
         .then(function(response) {
@@ -20,13 +32,11 @@ function passCarData(car_data) {
             passStationData(car_data, station_data);
     })
 };
-
 function passStationData(car_data, station_data) {
 
     d3.json(`static/WA_counties_geo.json`, function(geo) {
         function onEachFeature(feature, layer) {
-            layer.bindPopup("<h3>" + feature.properties.LSAD + " " + feature.properties.NAME
-            + "</h3>");
+            layer.bindPopup("<h3>" + feature.properties.NAME + "</h3>");
         }
         console.log(geo.features[0]);
         var geolayer = L.geoJSON(geo.features, {
@@ -36,6 +46,7 @@ function passStationData(car_data, station_data) {
     })
 }
 
+console.log("end");
 function createMap(car_data, station_data, geo) {
     // Define streetmap and darkmap layers
     var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -60,9 +71,28 @@ function createMap(car_data, station_data, geo) {
         "Dark Map": darkmap
     };
     
+    // An array which will be used to store created stationMarkers
+    var stationMarkers = [];
+    
+    for (var i = 0; i < station_data.length; i++) {
+        var s = station_data[i]
+        // loop through the station array, create a new marker, push it to the stationMarkers array
+        stationMarkers.push(
+        L.marker([s.lat, s.long])
+        .bindPopup("<h3>" + s.address + 
+        "</h3> <hr> <h3>Number of outlet types: " + s.outlets + 
+        "</h3> <hr> <h3>Operational status: " + s.status + "</h3>")
+        );
+    } 
+    
+    // Add all the stationMarkers to a new layer group.
+    // Now we can handle them as one group instead of referencing each individually
+    var stationLayer = L.layerGroup(stationMarkers);
+
     // Create overlay object to hold our overlay layer
     var overlayMaps = {
-        Counties: geo
+        counties: geo,
+        stations: stationLayer
     };
     
     // Create our map, giving it the streetmap and earthquakes layers to display on load
@@ -71,9 +101,9 @@ function createMap(car_data, station_data, geo) {
         47.88, -120.64
         ],
         zoom: 7,
-        layers: [streetmap, geo]
+        layers: [streetmap, geo, stationLayer]
     });
-    
+
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
       }).addTo(myMap);
