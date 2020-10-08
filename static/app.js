@@ -77,8 +77,7 @@ function createMap(car_data, station_data, geo) {
     for (var i = 0; i < station_data.length; i++) {
         // loop through the station array, create a new marker, push it to the stationMarkers array
         stationMarkers.push(
-        L.marker(station_data[i].lat, station_data[i].long).bindPopup("<h1>" + station_data[i].address + "</h1> <hr> <h3>Number of outlets " + station_data[i].outlets + "</h3> <hr> <h3>Operational status " + station_data[i].status + "</h3>")
-        );
+        L.marker([station_data[i].lat, station_data[i].long]).bindPopup("<h1>" + station_data[i].address + "</h1> <hr> <h3>Number of outlets " + station_data[i].outlets + "</h3> <hr> <h3>Operational status " + station_data[i].status + "</h3>"));
     }
     
     // Add all the stationMarkers to a new layer group.
