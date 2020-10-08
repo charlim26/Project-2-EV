@@ -44,20 +44,34 @@ def viz():
     data = [{
         "make" : c.make,
         "model" : c.model,
-        # "year" : c.model_year,
-        "city" : c.city
+        "model_year" : c.model_year,
+        "city" : c.city,
+        "states" : c.states,
+        "zip" : c.zip,
+        "id" : c.dol_vechile_id,
+        "range" : c.electric_range,
+        "vehicle_type" : c.electric_vehicle_type,
+        "vehicle_location" : c.vehicle_location,
+        "base_msrp" : c.base_msrp
         } for c in result]
-    # data2 = [{"car_model" : d.model} for d in result]
-    data3 = [data]
-    # print(data[0:5])
-    return jsonify(data3)
+    # print(data[0:3])
+    return jsonify(data)
 
 @app.route('/stations', methods=['GET'])
 def viz2():
     session = Session(engine)
-    result = session.query(db_stations.zip_code).all()
+    result = session.query(db_stations).all()
+    data = [{
+        "id" : c.station_id,
+        "status" : c.charging_status,
+        "lat" : c.lat,
+        "long" : c.long,
+        "address" : c.address,
+        "zip" : c.zip_code,
+        "outlets" : c.outlet_counts
+        } for c in result]
     # print(data[0:5])
-    return jsonify(result)
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True)
