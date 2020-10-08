@@ -23,7 +23,7 @@ fetch(`/electric`, {mode: "no-cors"})
         passCarData(car_data);
 });
 console.log("middle");
-function passCarData(car_data) {
+function passCarData(car_data) { 
     fetch(`/stations`, {mode: "no-cors"})
         .then(function(response) {
             return response.json();
@@ -79,20 +79,22 @@ function createMap(car_data, station_data, geo) {
         // loop through the station array, create a new marker, push it to the stationMarkers array
         stationMarkers.push(
         L.marker([s.lat, s.long])
-        .bindPopup("<h4>" + s.address + 
-        "</h4> <hr> <h5>Number of charging outlets: " + s.outlets + 
-        "</h5> <hr> <h6>Operational status: " + s.status + "</h6>")
+        .bindPopup("<h3>" + s.address + 
+        "</h3> <hr> <h3>Number of outlet types: " + s.outlets + 
+        "</h3> <hr> <h3>Operational status: " + s.status + "</h3>")
         );
-    }
+    } 
     
     // Add all the stationMarkers to a new layer group.
     // Now we can handle them as one group instead of referencing each individually
     var stationLayer = L.layerGroup(stationMarkers);
+    var heat = heatMap(car_data);
 
     // Create overlay object to hold our overlay layer
     var overlayMaps = {
         counties: geo,
-        stations: stationLayer
+        stations: stationLayer,
+        cars: heat
     };
     
     // Create our map, giving it the streetmap and earthquakes layers to display on load
@@ -101,10 +103,29 @@ function createMap(car_data, station_data, geo) {
         47.88, -120.64
         ],
         zoom: 7,
-        layers: [streetmap, geo, stationLayer]
+        layers: [streetmap, geo]
     });
 
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
       }).addTo(myMap);
 }
+
+function heatMap(data) {
+    var heatArray = [];
+    for (var i = 0; i < data.length; i++) {
+      var str = data[i].vehicle_location;
+      if (str) {
+        var arr = str.split(" ");
+        var long = arr[1].substring(1);
+        var lat = arr[2].substring(0, arr[2].length - 1);
+        // "+" to make sure a string becomes a numeric value
+        heatArray.push([+lat, +long]);
+      }
+    }
+    var heat = L.heatLayer(heatArray, {
+      radius: 35,
+      blur: 25
+    });
+    return heat;
+  }
