@@ -20,8 +20,15 @@ engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
 Base = automap_base()
 Base.prepare(engine, reflect=True)
 db_ev = Base.classes.ev_data
-db_stations = Base.classes.ev_data
+db_stations = Base.classes.ev_stations
 #print(db)
+
+# from bson import json_util
+# from bson.objectid import ObjectId
+# @app.route("/data", methods = ['GET'])
+# def index():
+#     data = list(db.zones.find())
+#     return json.dumps(data, default=json_util.default)
 
 @app.route('/')
 def home():
@@ -29,16 +36,26 @@ def home():
 
 @app.route('/electric', methods=['GET'])
 def viz():
+    # do we need to make a dictionary with each of the colums as keys? then jsonify it?
     session = Session(engine)
     result = session.query(db_ev).all()
-    # data = [{"car_make:" : c.make} for c in result]
+    # result2 = session.query(db_ev.model).all()
+    # result3 = {result, result2}
+    data = [{
+        "make" : c.make,
+        "model" : c.model,
+        # "year" : c.model_year,
+        "city" : c.city
+        } for c in result]
+    # data2 = [{"car_model" : d.model} for d in result]
+    data3 = [data]
     # print(data[0:5])
-    return jsonify(result)
+    return jsonify(data3)
 
 @app.route('/stations', methods=['GET'])
 def viz2():
     session = Session(engine)
-    result = session.query(db_stations).all()
+    result = session.query(db_stations.zip_code).all()
     # print(data[0:5])
     return jsonify(result)
 

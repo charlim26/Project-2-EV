@@ -12,18 +12,21 @@ d3.select(".bar-plot").text("hello world")
 
 var test = [1,2,3]
 
-fetch(`http://127.0.0.1:5000/electric`, {mode: "no-cors"}).then(function(data) {
-    var response = data;
-    console.log(data);
-    response.json().then(function(data){
+d3.json(`http://127.0.0.1:5000/electric`, {mode: "no-cors"})
+    .then(function(data) {
+        console.log(data.car_make);
+});
 
-    })
-})
+// fetch(`http://127.0.0.1:5000/electric`, {mode: "no-cors"})
+//     .then(function(response) {
+//         return response.json();
+//     }).then(function(data){
+//         console.log(data);
+// });
 
-fetch(`http://127.0.0.1:5000/stations`, {mode: "no-cors"}).then(function(data) {
-    var response = data;
-    console.log(data);
-    response.json().then(function(data){
-      
-    })
-})
+fetch(`http://127.0.0.1:5000/stations`, {mode: "no-cors"})
+    .then(function(response) {
+      return response.json();
+    }).then(function(data){
+      console.log(data);
+});
