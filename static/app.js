@@ -17,6 +17,27 @@ fetch(`/electric`, {mode: "no-cors"})
         // console.log("data:");
         console.log(data[0]);
         passCarData(data);
+        // heatMap(data);
+        // var heatArray = [];
+
+        // for (var i = 0; i < data.length; i++) {
+        //   var str = data[i].vehicle_location;
+        //   if (str) {
+        //     var arr = str.split(" ");
+        //     var long = arr[1].substring(1);
+        //     var lat = arr[2].substring(0, arr[2].length - 1);
+        //     // "+" to make sure a string becomes a numeric value
+        //     heatArray.push([+lat, +long]);
+        //   }
+        // }
+        // console.log(heatArray)
+
+        // var str = data[0].vehicle_location;
+        // var arr = str.split(" ");
+        // console.log(arr)
+        // var long = arr[1].substring(1)
+        // var lat = arr[2].substring(0, arr[2].length - 1)
+        // console.log(lat)
 });
 console.log("middle");
 function passCarData(car_data) {
@@ -85,4 +106,33 @@ function createMap(car_data, station_data, geo) {
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
       }).addTo(myMap);
+    
+    heatMap(car_data).addTo(myMap)
+}
+
+console.log("test");
+// create a heatmap
+// d3.json(`/electric`).then(function(data) {
+//   console.log(data[0]);
+// })
+
+function heatMap(data) {
+  var heatArray = [];
+
+  for (var i = 0; i < data.length; i++) {
+    var str = data[i].vehicle_location;
+    if (str) {
+      var arr = str.split(" ");
+      var long = arr[1].substring(1);
+      var lat = arr[2].substring(0, arr[2].length - 1);
+      // "+" to make sure a string becomes a numeric value
+      heatArray.push([+lat, +long]);
+    }
+  }
+  var heat = L.heatLayer(heatArray, {
+    radius: 20,
+    blur: 35
+  });
+
+  return heat;
 }
