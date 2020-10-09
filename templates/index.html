@@ -23,21 +23,41 @@
 <body>
     <!-- Nav Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+       
+       <!-- Trying to fit the logo and team name next to each other on the nav bar  -->
+        <!-- <a class="logo pull-left" href="#"><img src="{{url_for('static', filename='logo.png')}}" width="30" height="30" loading="lazy"/></a>
+        <span class="name pull-left">COMPANY NAME</span> -->
+        <!-- <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <span><img src="{{url_for('static', filename='logo.png')}}"/></span>
+                Ultimate Trade Sizer
+            </a>
+        </div> -->
+        <!-- <a href="#">
+            <img src="{{url_for('static', filename='logo.png')}}" width="30" height="30" alt=""/>
+        </a> -->
+        <a class="navbar-brand" href="#">
+            <img src="{{url_for('static', filename='logo.png')}}" width="30" height="30" alt=""/>
+            TEAM ELECTRIC
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="#"> Summary Findings <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/"> Summary Findings <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Visualization Map</a>
+              <a class="nav-link" href="/viz">Visualization Map</a>
             </li>
           </ul>
         </div>
       </nav>
+
+    <div>
+    <h1>Summary Page</h1>
+    </div>
 
     <!-- plot something using this id tag -->
     <div id="map"></div>

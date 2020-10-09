@@ -34,6 +34,11 @@ db_stations = Base.classes.ev_stations
 def home():
     return render_template("index.html")
 
+# Adding a second HTML page with a flask route
+@app.route('/viz')
+def about():
+    return render_template('viz.html')
+
 @app.route('/electric', methods=['GET'])
 def viz():
     # do we need to make a dictionary with each of the colums as keys? then jsonify it?
