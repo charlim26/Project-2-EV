@@ -22,6 +22,17 @@ fetch(`/electric`, {mode: "no-cors"})
         console.log(car_data[0]);
         passCarData(car_data);
 });
+
+for (var i =0; i < DataCue.length)
+
+
+
+
+
+
+
+
+
 console.log("middle");
 function passCarData(car_data) {
     fetch(`/stations`, {mode: "no-cors"})
@@ -36,8 +47,7 @@ function passStationData(car_data, station_data) {
 
     d3.json(`static/WA_counties_geo.json`, function(geo) {
         function onEachFeature(feature, layer) {
-            layer.bindPopup("<h3>" + "feature.properties.place" +
-            "</h3><hr><p>" + "new Date(feature.properties.time)" + "</p>");
+            layer.bindPopup("<h3>" + feature.properties.NAME + "</h3>");
         }
         console.log(geo.features[0]);
         var geolayer = L.geoJSON(geo.features, {
@@ -72,9 +82,23 @@ function createMap(car_data, station_data, geo) {
         "Dark Map": darkmap
     };
     
+    // An array which will be used to store created stationMarkers
+    var stationMarkers = [];
+    
+    for (var i = 0; i < station_data.length; i++) {
+        // loop through the station array, create a new marker, push it to the stationMarkers array
+        stationMarkers.push(
+        L.marker([station_data[i].lat, station_data[i].long]).bindPopup("<h1>" + station_data[i].address + "</h1> <hr> <h3>Number of outlets " + station_data[i].outlets + "</h3> <hr> <h3>Operational status " + station_data[i].status + "</h3>"));
+    }
+    
+    // Add all the stationMarkers to a new layer group.
+    // Now we can handle them as one group instead of referencing each individually
+    var stationLayer = L.layerGroup(stationMarkers);
+
     // Create overlay object to hold our overlay layer
     var overlayMaps = {
-        data: geo
+        counties: geo,
+        stations: stationLayer
     };
     
     // Create our map, giving it the streetmap and earthquakes layers to display on load
@@ -83,9 +107,9 @@ function createMap(car_data, station_data, geo) {
         47.88, -120.64
         ],
         zoom: 7,
-        layers: [streetmap, geo]
+        layers: [streetmap, geo, stationLayer]
     });
-    
+
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
       }).addTo(myMap);
