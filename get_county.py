@@ -5,4 +5,8 @@ table.columns = table.iloc[1,:]
 table = table.iloc[2:,:]
 table = table[['Zip Code', 'County']]
 def get_county(z):
-    return table.loc[table['Zip Code'] == str(z), 'County'].values[0]
+	a = table.loc[table['Zip Code'] == str(z), 'County'].values
+	if len(a) > 0:
+		return a[0]
+	else:
+		return "Unknown"
