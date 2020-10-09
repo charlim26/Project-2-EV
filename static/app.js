@@ -102,7 +102,7 @@ function createMap(car_data, station_data, geo) {
         center: [
         47.88, -120.64
         ],
-        zoom: 7,
+        zoom: 7.25,
         layers: [streetmap, geo]
     });
 
