@@ -98,7 +98,7 @@ function createMap(car_data, station_data, geo) {
     };
     
     // Create our map, giving it the streetmap and earthquakes layers to display on load
-    var myMap = L.map("map", {
+    var myMap = L.map("nav-link", {
         center: [
         47.88, -120.64
         ],
