@@ -56,20 +56,38 @@
           <h5>Number of electric vehicles in Washington State</h5>
         </div>
       </div>
+      <div class="row">
+        <div class="col"><p>The highest density of electric charging stations is in Seattle, Washington.</p></div>
+        <div class="col"><img src="{{url_for('static', filename='Electric Charging Stations.jpg')}}"></div>
+      </div>
       <hr>
       <div class="row">
         <div class="col">
           <h5>Density of electric vehicles in Washington State</h5>
+          <ul>
+            <li>As expected, the highest density of electric cars is located where there is a high density of electric charging stations – Seattle, Washington. 
+            </li>
+          </ul>
         </div>
       </div>
       <hr>
       <div class="row">
         <div class="col">
-          <h5>Plug-in vehicles are significantly more expensive than battery-powered vehicles</h5>
-          <p>Average prices (p-value < 0.04):</p>
+          <h5>Electric car costs: Plug-in vehicles versus Battery-powered vehicles</h5>
+          <p>Plug-in vehicles are significantly more expensive than battery-powered vehicles</p>
           <ul>
-            <li><p>Plug-in - $36,793 +/- 16,276</p></li>
-            <li><p>Battery-powered - $36,418 +/- 22,170</p></li>
+            <li>Average prices (p-value < 0.04):
+              <ul>
+                <li><p>Plug-in - $36,793 +/- 16,276</p></li>
+                <li><p>Battery-powered - $36,418 +/- 22,170</p></li>
+              </ul>
+            </li>
+            <li>
+              Range is not associated with costs (correlation coefficent of base MSRP and the avg batter range is 0.2)
+              <ul><li>
+                <img src="{{url_for('static', filename='Average BEV Battery Range v. Average BEV Base MSRP in WA.png')}}">
+              </li></ul>
+            </li>
           </ul>
         </div>
       </div>
@@ -78,8 +96,28 @@
         <div class="col">
           <h5>Top 10 vehicles in WA State</h5>
           <ul>
-            <li>Plug-in vehicles AND battery powered vehicles</li>
-            <li>Battery powered vechicles only</li>
+            <li>Plug-in vehicles AND battery powered vehicles
+              <ul><li>
+                Tesla is the top car
+              </li></ul>
+            </li>
+            <li>Battery-powered vechicles only
+              <ul><li>
+                Tesla is the top car
+              </li></ul>
+            </li>
+              Plug-in AND battery-powered vehicles:
+              <ul><li>
+                <img src="{{url_for('static', filename='Top 10 BEV and PHEV Cars in WA(bar chart).png')}}" width="35%" height="35%">
+                <img src="{{url_for('static', filename='Top 10 BEV and PHEV Cars in WA(pie chart).png')}}" width="35%" height="35%">
+              </ul></li>
+            <li>Battery-powered vehicles only:
+              <ul><li>
+                <img src="{{url_for('static', filename='Top 10 BEV Cars in WA(bar chart).png')}}" width="35%" height="35%">
+                <img src="{{url_for('static', filename='Top 10 BEV Cars in WA(pie chart).png')}}" width="35%" height="35%">
+              </li></ul>
+            </li>
+            <li><img src="{{url_for('static', filename='Tesla Models.jpg')}}" width="35%" height="35%"></li>
           </ul>
         </div>
       </div>
@@ -88,7 +126,12 @@
         <div class="col">
           <h5>Tesla</h5>
           <ul>
-            <li>39% of people who drive an electric car in WA State drive a Tesla</li>
+            <li>39% of people who drive an electric car in WA State drive a Tesla
+              <ul>
+                <li><img src="{{url_for('static', filename='Tesla Model 3.jpg')}}" width="35%" height="35%"></li>
+                <li></li>
+              </ul>
+            </li>
             <li>Tesla is significantly more expensive than other cars (p-value < 0.01)
               <ul>
                 <li>$40,787 +/- $27,506</li>
