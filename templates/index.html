@@ -58,7 +58,7 @@
       </div>
       <div class="row">
         <div class="col"><p>The highest density of electric charging stations is in Seattle, Washington.</p></div>
-        <div class="col"><img src="{{url_for('static', filename='Electric Charging Stations.jpg')}}"></div>
+        <div class="col slide" data-aos="fade"><img src="{{url_for('static', filename='Electric Charging Stations.jpg')}}"></div>
       </div>
       <hr>
       <div class="row">
@@ -85,7 +85,9 @@
             <li>
               Range is not associated with costs (correlation coefficent of base MSRP and the avg batter range is 0.2)
               <ul><li>
-                <img src="{{url_for('static', filename='Average BEV Battery Range v. Average BEV Base MSRP in WA.png')}}">
+                <div class="col slide" data-aos="fade">
+                  <img src="{{url_for('static', filename='Average BEV Battery Range v. Average BEV Base MSRP in WA.png')}}">
+                </div>
               </li></ul>
             </li>
           </ul>
@@ -108,16 +110,16 @@
             </li>
               Plug-in AND battery-powered vehicles:
               <ul><li>
-                <img src="{{url_for('static', filename='Top 10 BEV and PHEV Cars in WA(bar chart).png')}}" width="35%" height="35%">
-                <img src="{{url_for('static', filename='Top 10 BEV and PHEV Cars in WA(pie chart).png')}}" width="35%" height="35%">
+                <div class="col slide" data-aos="fade"><img src="{{url_for('static', filename='Top 10 BEV and PHEV Cars in WA(bar chart).png')}}" width="35%" height="35%">
+                <img src="{{url_for('static', filename='Top 10 BEV and PHEV Cars in WA(pie chart).png')}}" width="35%" height="35%"></div>
               </ul></li>
             <li>Battery-powered vehicles only:
               <ul><li>
-                <img src="{{url_for('static', filename='Top 10 BEV Cars in WA(bar chart).png')}}" width="35%" height="35%">
-                <img src="{{url_for('static', filename='Top 10 BEV Cars in WA(pie chart).png')}}" width="35%" height="35%">
+                <div class="col slide" data-aos="fade"><img src="{{url_for('static', filename='Top 10 BEV Cars in WA(bar chart).png')}}" width="35%" height="35%">
+                <img src="{{url_for('static', filename='Top 10 BEV Cars in WA(pie chart).png')}}" width="35%" height="35%"></div>
               </li></ul>
             </li>
-            <li><img src="{{url_for('static', filename='Tesla Models.jpg')}}" width="35%" height="35%"></li>
+            <li><div class="col slide" data-aos="fade"><img src="{{url_for('static', filename='Tesla Models.jpg')}}" width="35%" height="35%"></div></li>
           </ul>
         </div>
       </div>
@@ -128,7 +130,7 @@
           <ul>
             <li>39% of people who drive an electric car in WA State drive a Tesla
               <ul>
-                <li><img src="{{url_for('static', filename='Tesla Model 3.jpg')}}" width="35%" height="35%"></li>
+                <li><div class="col slide" data-aos="fade"><img src="{{url_for('static', filename='Tesla Model 3.jpg')}}" width="35%" height="35%"></div></li>
                 <li></li>
               </ul>
             </li>
