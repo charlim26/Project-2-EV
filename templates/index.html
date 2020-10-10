@@ -171,9 +171,9 @@
     crossorigin=""></script>
     <!-- API key -->
     <!-- Leaflet heatmap plugin-->
-    <script type="text/javascript" src="static/leaflet-heat.js"></script>
+    <!-- <script type="text/javascript" src="static/leaflet-heat.js"></script>
     <script type="text/javascript" src="static/config.js"></script>
-    <script type="text/javascript" src="static/app.js"></script>
+    <script type="text/javascript" src="static/app.js"></script> -->
 
     <!-- Bootstrap JS libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -183,7 +183,10 @@
     <!--Animate on scroll-->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-      AOS.init();
+      AOS.init({
+        delay:20,
+        duration:1000
+      });
     </script>
 </body>
 </html>
