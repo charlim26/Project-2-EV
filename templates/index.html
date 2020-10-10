@@ -6,12 +6,12 @@
     <title>Team Electric</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!-- Leaflet CSS -->
-    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
     integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-    crossorigin=""/> -->
+    crossorigin=""/>
 
     <!-- d3 JavaScript -->
-    <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
 
     <!-- Our CSS -->
     <link rel="stylesheet" type="text/css" href="static/style.css">
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-color:palegreen;">
     <!-- Nav Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
@@ -46,24 +46,24 @@
       </nav>
 
     <div class="container-lg">
-    <h1>Washington State Electric Automobile Findings</h1>
-    <h3>Visualization And Analysis Of Charging Stations And Vehicles</h3>
+    <h1 style="text-align:center">Washington State Electric Automobile Findings</h1>
+    <h3 style="text-align:center">Visualization And Analysis Of Charging Stations And Vehicles</h3>
     </div>
     <hr>
     <div class="container-lg">
       <div class="row">
         <div class="col">
-          <h5>Number of electric vehicles in Washington State</h5>
+          <h5 style="text-align:center">Number of electric vehicles in Washington State: 60,320</h5>
         </div>
       </div>
       <div class="row">
-        <div class="col"><p>The highest density of electric charging stations is in Seattle, Washington.</p></div>
+        <div class="col"><p>There are a total of 940 charging stations in WA State. The highest density of electric charging stations is in Seattle, Washington.</p></div>
         <div class="col slide" data-aos="fade"><img src="{{url_for('static', filename='Electric Charging Stations.jpg')}}"></div>
       </div>
       <hr>
       <div class="row">
         <div class="col">
-          <h5>Density of electric vehicles in Washington State</h5>
+          <h5 style="text-align:center">Density of electric vehicles in Washington State</h5>
           <ul>
             <li>As expected, the highest density of electric cars is located where there is a high density of electric charging stations – Seattle, Washington. 
             </li>
@@ -73,7 +73,7 @@
       <hr>
       <div class="row">
         <div class="col">
-          <h5>Electric car costs: Plug-in vehicles versus Battery-powered vehicles</h5>
+          <h5 style="text-align:center">Electric car costs: Plug-in vehicles versus Battery-powered vehicles</h5>
           <p>Plug-in vehicles are significantly more expensive than battery-powered vehicles</p>
           <ul>
             <li>Average prices (p-value < 0.04):
@@ -86,7 +86,7 @@
               Range is not associated with costs (correlation coefficent of base MSRP and the avg batter range is 0.2)
               <ul><li>
                 <div class="col slide" data-aos="fade">
-                  <img src="{{url_for('static', filename='Average BEV Battery Range v. Average BEV Base MSRP in WA.png')}}">
+                  <img src="{{url_for('static', filename='Average BEV Battery Range v. Average BEV Base MSRP in WA.png')}}" width="90%" height="90%">
                 </div>
               </li></ul>
             </li>
@@ -96,7 +96,7 @@
       <hr>
       <div class="row">
         <div class="col">
-          <h5>Top 10 vehicles in WA State</h5>
+          <h5 style="text-align:center">Top 10 vehicles in WA State</h5>
           <ul>
             <li>Plug-in vehicles AND battery powered vehicles
               <ul><li>
@@ -110,28 +110,27 @@
             </li>
               Plug-in AND battery-powered vehicles:
               <ul><li>
-                <div class="col slide" data-aos="fade"><img src="{{url_for('static', filename='Top 10 BEV and PHEV Cars in WA(bar chart).png')}}" width="35%" height="35%">
-                <img src="{{url_for('static', filename='Top 10 BEV and PHEV Cars in WA(pie chart).png')}}" width="35%" height="35%"></div>
+                <div class="col slide" data-aos="fade"><img src="{{url_for('static', filename='Top 10 BEV and PHEV Cars in WA(bar chart).png')}}" width="90%" height="90%">
+                <img src="{{url_for('static', filename='Top 10 BEV and PHEV Cars in WA(pie chart).png')}}" width="90%" height="90%"></div>
               </ul></li>
             <li>Battery-powered vehicles only:
               <ul><li>
-                <div class="col slide" data-aos="fade"><img src="{{url_for('static', filename='Top 10 BEV Cars in WA(bar chart).png')}}" width="35%" height="35%">
-                <img src="{{url_for('static', filename='Top 10 BEV Cars in WA(pie chart).png')}}" width="35%" height="35%"></div>
+                <div class="col slide" data-aos="fade"><img src="{{url_for('static', filename='Top 10 BEV Cars in WA(bar chart).png')}}" width="90%" height="90%">
+                <img src="{{url_for('static', filename='Top 10 BEV Cars in WA(pie chart).png')}}" width="90%" height="90%"></div>
               </li></ul>
             </li>
-            <li><div class="col slide" data-aos="fade"><img src="{{url_for('static', filename='Tesla Models.jpg')}}" width="35%" height="35%"></div></li>
+            
           </ul>
         </div>
       </div>
       <hr>
       <div class="row">
         <div class="col">
-          <h5>Tesla</h5>
+          <h5 style="text-align:center">Tesla</h5>
           <ul>
-            <li>39% of people who drive an electric car in WA State drive a Tesla
+            <li>42% of people who drive an electric car in WA State drive a Tesla
               <ul>
-                <li><div class="col slide" data-aos="fade"><img src="{{url_for('static', filename='Tesla Model 3.jpg')}}" width="35%" height="35%"></div></li>
-
+                <li><div class="col slide" data-aos="fade"><img src="{{url_for('static', filename='Tesla Model 3.jpg')}}" width="90%" height="90%"></div></li>
               </ul>
             </li>
             <li>Tesla is significantly more expensive than other cars (p-value < 0.01)
@@ -166,9 +165,9 @@
 
 
     <!-- Leaflet JS -->
-    <!-- <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
     integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-    crossorigin=""></script> -->
+    crossorigin=""></script>
     <!-- API key -->
     <!-- Leaflet heatmap plugin-->
     <!-- <script type="text/javascript" src="static/leaflet-heat.js"></script>
