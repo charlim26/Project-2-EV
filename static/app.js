@@ -40,7 +40,12 @@ function passStationData(car_data, station_data) {
         }
         console.log(geo.features[0]);
         var geolayer = L.geoJSON(geo.features, {
-            onEachFeature: onEachFeature
+            onEachFeature: onEachFeature, style: function(feature) {
+                return {
+                  color: "white",
+                  fillColor: "white"
+                };
+          }
         });
         createMap(car_data, station_data, geolayer);
     })
@@ -124,8 +129,8 @@ function heatMap(data) {
       }
     }
     var heat = L.heatLayer(heatArray, {
-      radius: 20,
-      blur: 35
+      radius: 30,
+      blur: 20
     });
     return heat;
   }
