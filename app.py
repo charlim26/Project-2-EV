@@ -1,4 +1,5 @@
-## Team Electric Flask App ##
+## Team Electric Flask App - Jay Sueno, Trevor Kleinstuber, Charlie Martinez, Nghia Nguyen ##
+
 # to run the app use command python app.py or py app.py (you can paramter port=0000 to change the prt)
 ### 1. Import libraries and dependencies
 from flask import Flask, jsonify, render_template
