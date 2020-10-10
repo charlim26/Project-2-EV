@@ -23,7 +23,7 @@ fetch(`/electric`, {mode: "no-cors"})
         passCarData(car_data);
 });
 console.log("middle");
-function passCarData(car_data) { 
+function passCarData(car_data) {
     fetch(`/stations`, {mode: "no-cors"})
         .then(function(response) {
             return response.json();
@@ -102,7 +102,7 @@ function createMap(car_data, station_data, geo) {
         center: [
         47.88, -120.64
         ],
-        zoom: 7,
+        zoom: 7.25,
         layers: [streetmap, geo]
     });
 
@@ -124,8 +124,8 @@ function heatMap(data) {
       }
     }
     var heat = L.heatLayer(heatArray, {
-      radius: 35,
-      blur: 25
+      radius: 20,
+      blur: 35
     });
     return heat;
   }
