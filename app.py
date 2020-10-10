@@ -21,6 +21,7 @@ db_ev = Base.classes.ev_data
 db_stations = Base.classes.ev_stations
 #print(db)
 
+# 3. Create the routes for each webpage
 @app.route('/')
 def home():
     return render_template("index.html")
@@ -30,6 +31,8 @@ def home():
 def about():
     return render_template('viz.html')
 
+# 4. Create the routes to connect to our databases in PostgreSQL
+# 5. Parse the data from the database and turn it into a json file to be read by app.js file
 @app.route('/electric', methods=['GET'])
 def viz():
     # do we need to make a dictionary with each of the colums as keys? then jsonify it?

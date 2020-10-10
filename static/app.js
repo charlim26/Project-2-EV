@@ -1,15 +1,6 @@
-// need to create a simple viz using d3.json(`/whatever_route`).then(function(something) {})
-// let allowCrossDomain = function(req, res, next) {
-//     res.header('Access-Control-Allow-Origin', "*");
-//     res.header('Access-Control-Allow-Headers', "*");
-//     next();
-//   }
-// //app.use(allowCrossDomain);
+// Team Electric - Jay Sueno, Trevor Kleinstuber, Charlie Martinez, Nghia Nguyen
 
-// d3.select("#bar-plot").text("hello world");
-
-// var test = [1,2,3]
-
+// fetch the electric database using the flask route
 fetch(`/electric`, {mode: "no-cors"})
     .then(function(response) {
         // console.log(response);
@@ -22,7 +13,8 @@ fetch(`/electric`, {mode: "no-cors"})
         console.log(car_data[0]);
         passCarData(car_data);
 });
-console.log("middle");
+
+// fetch station data within the passCarData function
 function passCarData(car_data) {
     fetch(`/stations`, {mode: "no-cors"})
         .then(function(response) {
@@ -32,6 +24,10 @@ function passCarData(car_data) {
             passStationData(car_data, station_data);
     })
 };
+
+// fetch geojson file with the county objects to map the counties
+// pop up with county info with mouse click
+// create the map with the parameters
 function passStationData(car_data, station_data) {
 
     d3.json(`static/WA_counties_geo.json`, function(geo) {
@@ -51,7 +47,7 @@ function passStationData(car_data, station_data) {
     })
 }
 
-console.log("end");
+// create the maps for visualization using mapbox
 function createMap(car_data, station_data, geo) {
     // Define streetmap and darkmap layers
     var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -116,6 +112,7 @@ function createMap(car_data, station_data, geo) {
       }).addTo(myMap);
 }
 
+// create heatmap function to populate within the maps
 function heatMap(data) {
     var heatArray = [];
     for (var i = 0; i < data.length; i++) {
